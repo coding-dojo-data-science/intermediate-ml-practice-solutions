@@ -72,13 +72,60 @@ from sklearn.metrics import classification_report, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
 
+# def classification_metrics(y_true, y_pred, label='',
+#                            output_dict=False, figsize=(8,4),
+#                            normalize='true', cmap='Blues',
+#                            colorbar=False,values_format=".2f"):
+#     """Classification metrics function from Intro to Machine Learning"""
+#     # Get the classification report
+#     report = classification_report(y_true, y_pred)
+#     ## Print header and report
+#     header = "-"*70
+#     print(header, f" Classification Metrics: {label}", header, sep='\n')
+#     print(report)
+    
+#     ## CONFUSION MATRICES SUBPLOTS
+#     fig, axes = plt.subplots(ncols=2, figsize=figsize)
+    
+#     # create a confusion matrix  of raw counts
+#     ConfusionMatrixDisplay.from_predictions(y_true, y_pred,
+#                 normalize=None, cmap='gist_gray_r', values_format="d", colorbar=colorbar,
+#                 ax = axes[0],);
+#     axes[0].set_title("Raw Counts")
+    
+#     # create a confusion matrix with the test data
+#     ConfusionMatrixDisplay.from_predictions(y_true, y_pred,
+#                 normalize=normalize, cmap=cmap, values_format=values_format, colorbar=colorbar,
+#                 ax = axes[1]);
+#     axes[1].set_title("Normalized Confusion Matrix")
+    
+#     # Adjust layout and show figure
+#     fig.tight_layout()
+#     plt.show()
+    
+#     # Return dictionary of classification_report
+#     if output_dict==True:
+#         report_dict = classification_report(y_true, y_pred, output_dict=True)
+#         return report_dict
+
+
+## PREVIOUS CLASSIFICATION_METRICS FUNCTION FROM INTRO TO ML
+from sklearn.metrics import classification_report, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+import numpy as np
+
 def classification_metrics(y_true, y_pred, label='',
                            output_dict=False, figsize=(8,4),
                            normalize='true', cmap='Blues',
                            colorbar=False,values_format=".2f"):
-    """Classification metrics function from Intro to Machine Learning"""
+    """Modified version of classification metrics function from Intro to Machine Learning.
+    Updates:
+    - Reversed raw counts confusion matrix cmap  (so darker==more).
+    - Added arg for normalized confusion matrix values_format
+    """
     # Get the classification report
     report = classification_report(y_true, y_pred)
+    
     ## Print header and report
     header = "-"*70
     print(header, f" Classification Metrics: {label}", header, sep='\n')
@@ -87,16 +134,23 @@ def classification_metrics(y_true, y_pred, label='',
     ## CONFUSION MATRICES SUBPLOTS
     fig, axes = plt.subplots(ncols=2, figsize=figsize)
     
-    # create a confusion matrix  of raw counts
+    # Create a confusion matrix  of raw counts (left subplot)
     ConfusionMatrixDisplay.from_predictions(y_true, y_pred,
-                normalize=None, cmap='gist_gray_r', values_format="d", colorbar=colorbar,
-                ax = axes[0],);
+                                            normalize=None, 
+                                            cmap='gist_gray_r',# Updated cmap
+                                            values_format="d", 
+                                            colorbar=colorbar,
+                                            ax = axes[0]);
     axes[0].set_title("Raw Counts")
+
     
-    # create a confusion matrix with the test data
+    # Create a confusion matrix with the data with normalize argument 
     ConfusionMatrixDisplay.from_predictions(y_true, y_pred,
-                normalize=normalize, cmap=cmap, values_format=values_format, colorbar=colorbar,
-                ax = axes[1]);
+                                            normalize=normalize,
+                                            cmap=cmap, 
+                                            values_format=values_format, #New arg
+                                            colorbar=colorbar,
+                                            ax = axes[1]);
     axes[1].set_title("Normalized Confusion Matrix")
     
     # Adjust layout and show figure
@@ -107,6 +161,11 @@ def classification_metrics(y_true, y_pred, label='',
     if output_dict==True:
         report_dict = classification_report(y_true, y_pred, output_dict=True)
         return report_dict
+
+
+
+
+##########
 
 
 def get_true_pred_labels(model,ds):
