@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
+
 def plot_history(history,figsize=(6,8)):
     # Get a unique list of metrics 
     all_metrics = np.unique([k.replace('val_','') for k in history.history.keys()])
@@ -36,8 +37,6 @@ def plot_history(history,figsize=(6,8)):
     fig.tight_layout()
     plt.show()
 
- 
-
 
 def evaluate_classification(model, X_train, y_train, X_test, y_test,
                          figsize=(6,4), normalize='true', output_dict = False,
@@ -69,47 +68,6 @@ def evaluate_classification(model, X_train, y_train, X_test, y_test,
 ### FINAL FROM FLEXIBILE EVAL FUNCTIONS LESSON
    
 from sklearn.metrics import classification_report, ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
-
-
-# def classification_metrics(y_true, y_pred, label='',
-#                            output_dict=False, figsize=(8,4),
-#                            normalize='true', cmap='Blues',
-#                            colorbar=False,values_format=".2f"):
-#     """Classification metrics function from Intro to Machine Learning"""
-#     # Get the classification report
-#     report = classification_report(y_true, y_pred)
-#     ## Print header and report
-#     header = "-"*70
-#     print(header, f" Classification Metrics: {label}", header, sep='\n')
-#     print(report)
-    
-#     ## CONFUSION MATRICES SUBPLOTS
-#     fig, axes = plt.subplots(ncols=2, figsize=figsize)
-    
-#     # create a confusion matrix  of raw counts
-#     ConfusionMatrixDisplay.from_predictions(y_true, y_pred,
-#                 normalize=None, cmap='gist_gray_r', values_format="d", colorbar=colorbar,
-#                 ax = axes[0],);
-#     axes[0].set_title("Raw Counts")
-    
-#     # create a confusion matrix with the test data
-#     ConfusionMatrixDisplay.from_predictions(y_true, y_pred,
-#                 normalize=normalize, cmap=cmap, values_format=values_format, colorbar=colorbar,
-#                 ax = axes[1]);
-#     axes[1].set_title("Normalized Confusion Matrix")
-    
-#     # Adjust layout and show figure
-#     fig.tight_layout()
-#     plt.show()
-    
-#     # Return dictionary of classification_report
-#     if output_dict==True:
-#         report_dict = classification_report(y_true, y_pred, output_dict=True)
-#         return report_dict
-
-
-## PREVIOUS CLASSIFICATION_METRICS FUNCTION FROM INTRO TO ML
 from sklearn.metrics import classification_report, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import numpy as np
@@ -163,10 +121,7 @@ def classification_metrics(y_true, y_pred, label='',
         return report_dict
 
 
-
-
 ##########
-
 
 def get_true_pred_labels(model,ds):
     """Gets the labels and predicted probabilities from a Tensorflow model and Dataset object.
